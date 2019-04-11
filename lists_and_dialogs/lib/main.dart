@@ -54,15 +54,58 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('My First Flutter App'),
         ),
       ),
-      body: Center(
-          child: Text('Hello world!',
-            style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 100.0,
-                color: Colors.orange
-            ),
-          )
-      ),
+      body: _MyList()
     );
   }
+}
+
+class _MyList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    ListView.builder(
+      padding: const EdgeInsets.all(4.0),
+      itemBuilder: (context, i) {
+        ListTile(
+          title: Text("A random username"),
+          subtitle: Text("Online", style: TextStyle(fontStyle: FontStyle.italic, color: Colors.green)),
+          leading: const Icon(Icons.face),
+          trailing: RaisedButton(
+            child: Text("Remove"),
+            onPressed: () {
+              deleteDialog(context).then((value) {
+                print('Value is: $value');
+              })
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+Future <bool> deleteDialog(BuildContext context){
+  showDialog(
+    context: context,
+    barrierDismissible: false, // With this line we can just press Yes or not.
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Are you sure?"),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Yes"),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+
+          FlatButton(
+            child: Text("No"),
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+          )
+        ],
+      );
+    }
+  );
 }
