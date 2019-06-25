@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'My First flutter App'),
+      home: MyHomePage(title: 'List and Dialogs'),
     );
   }
 }
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text('My First Flutter App'),
+          child: Text('List and Dialogs'),
         ),
       ),
       body: _MyList()
@@ -74,7 +74,7 @@ class _MyList extends StatelessWidget {
             onPressed: () {
               deleteDialog(context).then((value) {
                 print('Value is: $value');
-              })
+              });
             },
           ),
         );
@@ -97,7 +97,6 @@ Future <bool> deleteDialog(BuildContext context){
               Navigator.of(context).pop(true);
             },
           ),
-
           FlatButton(
             child: Text("No"),
             onPressed: () {
