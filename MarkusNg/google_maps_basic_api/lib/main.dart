@@ -49,6 +49,11 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         centerTitle: false,
         title: const Text('Google Maps'),
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
+        backgroundColor: Colors.white,
         actions: [
           if (_origin != null)
             TextButton(
