@@ -1,16 +1,46 @@
-# google_maps_basic_api
+# Flutter Google Maps Basic Tutorial
 
-A new Flutter project.
+I used this [YouTube Video](https://youtu.be/Zz5hMvgiWmY) as a base to make the project.
 
-## Getting Started
+## Setup
 
-This project is a starting point for a Flutter application.
+- Get an API Key at [https://cloud.google.com/maps-platform/](https://cloud.google.com/maps-platform/)
 
-A few resources to get you started if this is your first Flutter project:
+- Enable Maps SDK for Android, Maps SDK for iOS, and Directions API.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Add your API Key to the specified files
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+`android/app/src/main/AndroidManifest.xml`
+
+```xml
+<manifest ...
+  <application ...
+    <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="YOUR KEY HERE"/>
+```
+
+`ios/Runner/AppDelegate.swift`
+
+```swift
+import UIKit
+import Flutter
+import GoogleMaps
+
+@UIApplicationMain
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    GMSServices.provideAPIKey("YOUR KEY HERE")
+    GeneratedPluginRegistrant.register(with: self)
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+}
+```
+
+`lib/.env.dart`
+
+```
+const String googleAPIKey = 'YOUR KEY HERE';
+```
