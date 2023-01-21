@@ -1,6 +1,7 @@
 # flutter_responsive_dashboard_ui
 
-A new Flutter project.
+A responsive dashboard ui made in Flutter, using as a base this
+[YouTube video](https://youtu.be/BAc5OHF3emU).
 
 ## Getting Started
 
