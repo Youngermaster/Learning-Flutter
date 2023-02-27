@@ -69,27 +69,29 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Fetch Data Example'),
         ),
-        body: Center(
-          child: FutureBuilder<List<Album>>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(snapshot.data![index].title.toString()),
-                      trailing: Text(snapshot.data![index].id.toString()),
-                      subtitle: Text(snapshot.data![index].userId.toString()),
-                    );
-                  },
-                );
-                // return Text(snapshot.data!.title);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
+        body: SafeArea(
+          child: Center(
+            child: FutureBuilder<List<Album>>(
+              future: futureAlbum,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(snapshot.data![index].title.toString()),
+                        trailing: Text(snapshot.data![index].id.toString()),
+                        subtitle: Text(snapshot.data![index].userId.toString()),
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
           ),
         ),
       ),
